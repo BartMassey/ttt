@@ -5,6 +5,7 @@
 #include <Xm/Form.h>
 #include <Xm/Scale.h>
 #include "inspmc.h"
+#include <stdlib.h>
 #include <stdio.h>
 #include "ttt.h"
 

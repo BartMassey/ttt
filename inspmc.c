@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include <Xm/Xm.h>
 #include "inspmc.h"
 

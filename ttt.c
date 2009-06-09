@@ -11,6 +11,7 @@
  * and thus move first.
  */
 
+#include <stdlib.h>
 #include <stdio.h>
 #include "ttt.h"
  
