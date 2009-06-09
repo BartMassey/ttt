@@ -48,13 +48,15 @@ static enum who whoother(enum who w) {
   /*NOTREACHED*/
 }
 
-enum win referee(struct board *b) {
+enum win referee(struct board *b, int misere) {
   int i, j, blanks;
   enum who w;
   enum win victor;
 
   w = b->movewho;
-  victor = whotowin(whoother(w));
+  victor = whotowin(w);
+  if (misere)
+      victor = whotowin(whoother(w));
   blanks = 0;
   /* row */
   i = b->movex;
@@ -92,12 +94,12 @@ enum win referee(struct board *b) {
   return WIN_DRAW;
 }
 
-static int minmax(struct board *b, enum who w, int lev) {
+static int minmax(struct board *b, enum who w, int lev, int misere) {
   enum win whowins;
   struct board btmp;
   int i, j, maxval, curmax;
 
-  whowins = referee(b);
+  whowins = referee(b, misere);
   switch (whowins) {
   case WIN_X:
   case WIN_O:
@@ -121,7 +123,7 @@ static int minmax(struct board *b, enum who w, int lev) {
 	btmp.movewho = w;
 	btmp.cell[i][j] = w;
 	btmp.count--;
-	maxval = -minmax(&btmp, whoother(w), lev - 1);
+	maxval = -minmax(&btmp, whoother(w), lev - 1, misere);
 	if (maxval > curmax)
 	  curmax = maxval;
       }
@@ -130,7 +132,7 @@ static int minmax(struct board *b, enum who w, int lev) {
   return curmax;
 }
 
-void computermove(struct board *b, enum who w, int lev) {
+void computermove(struct board *b, enum who w, int lev, int misere) {
   int i, j, n, move, threshold;
   int score[3][3];
   struct board btmp;
@@ -145,7 +147,7 @@ void computermove(struct board *b, enum who w, int lev) {
 	btmp.movewho = w;
 	btmp.cell[i][j] = w;
 	btmp.count--;
-        score[i][j] = -minmax(&btmp, whoother(w), lev);
+        score[i][j] = -minmax(&btmp, whoother(w), lev, misere);
       }
     }
   for (threshold = 1; threshold > -2; --threshold) {

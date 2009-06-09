@@ -43,8 +43,8 @@ extern int compfirst;
 extern int won;
 
 extern enum win whotowin(enum who w);
-extern enum win referee(struct board *b);
-extern void computermove(struct board *b, enum who w, int lev);
+extern enum win referee(struct board *b, int misere);
+extern void computermove(struct board *b, enum who w, int lev, int misere);
 extern void randommove(struct board *b, enum who w);
 extern void initboard(void);
 

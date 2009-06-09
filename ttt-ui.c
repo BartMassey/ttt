@@ -23,6 +23,7 @@ static struct globalOptions {
   String compWinString, humanWinString, drawString;
   int level;
   Boolean compFirst;
+  Boolean misere;
 } globalData;
 
 static XtResource resources[] = {
@@ -57,12 +58,17 @@ static XtResource resources[] = {
   {"compFirst", "CompFirst", XtRBoolean, sizeof(Boolean),
    XtOffset(struct globalOptions *, compFirst),
    XtRImmediate, (XtPointer) FALSE},
+
+  {"misere", "Misere", XtRBoolean, sizeof(Boolean),
+   XtOffset(struct globalOptions *, misere),
+   XtRImmediate, (XtPointer) FALSE},
 };
 
 XrmOptionDescRec options[] = {
   { "-x", "*compFirst", XrmoptionNoArg, "false" },
   { "-o", "*compFirst", XrmoptionNoArg, "true" },
   { "-l", "*level", XrmoptionSepArg, 0 },
+  { "-m", "*misere", XrmoptionNoArg, "true" },
 };
 
 static Pixmap markpixmap(enum who mark) {
@@ -124,7 +130,7 @@ static void movecallback(Widget w, XtPointer clientData, XtPointer callData) {
   currentboard.cell[x][y] = humanside;
   currentboard.count--;
   refreshboard(&currentboard);
-  switch (winner = referee(&currentboard)) {
+  switch (winner = referee(&currentboard, globalData.misere)) {
   case WIN_NOTYET:
     break;
   case WIN_X:
@@ -143,9 +149,9 @@ static void movecallback(Widget w, XtPointer clientData, XtPointer callData) {
   if (!RANDOM(MAX(1, 15 * curlev - currentboard.count)))
     randommove(&currentboard, computerside);
   else
-    computermove(&currentboard, computerside, 2 * curlev);
+    computermove(&currentboard, computerside, 2 * curlev, globalData.misere);
   refreshboard(&currentboard);
-  switch (winner = referee(&currentboard)) {
+  switch (winner = referee(&currentboard, globalData.misere)) {
   case WIN_NOTYET:
     break;
   case WIN_X:
