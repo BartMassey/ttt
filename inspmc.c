@@ -173,5 +173,5 @@ void InstallXmCvtBitmapStringToPixmap(Widget w) {
   cvtArg[1].address_id = (XtPointer) depth;
   cvtArg[1].size = sizeof depth;
   XtSetTypeConverter(XtRString, XtRPixmap, cvtStringToPixmap,
-   cvtArg, XtNumber(cvtArg), XtCacheNone | XtCacheRefCount, freePixmap);
+   cvtArg, XtNumber(cvtArg), XtCacheAll, freePixmap);
 }
