@@ -1,0 +1,7 @@
+TTT.xPixmap: xbm:yellow:dark green:x.xbm
+TTT.oPixmap: xbm:coral1:dark green:o.xbm
+TTT.bPixmap: xbm:red:dark green:b.xbm
+TTT.humanWinString: You won!!
+TTT.compWinString: I won!!
+TTT.drawString: A draw.
+TTT.level: 2

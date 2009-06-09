@@ -1,0 +1,18 @@
+XMLIB = -lXm
+CC = gcc
+LOCAL_LIBRARIES = $(XMLIB) $(XTOOLLIB) $(XLIB)
+SRCS = ttt.c ttt-ui.c inspmc.c fallback.c
+OBJS = ttt.o ttt-ui.o inspmc.o fallback.o
+
+ComplexProgramTarget(ttt)
+
+all:: TTT.ad
+
+fallback.c: TTT-fallback.ad
+	sh ./buildfallback.sh TTT-fallback.ad > fallback.c
+
+TTT.ad: TTT-fallback.ad TTT-bonus.ad
+	cat TTT-fallback.ad TTT-bonus.ad > TTT.ad
+
+clean::
+	-$(RM) TTT.ad
