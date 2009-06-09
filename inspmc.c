@@ -3,7 +3,7 @@
 #include <Xm/Xm.h>
 #include "inspmc.h"
 
-static int one = 1;
+static unsigned int one = 1;
 
 static Boolean parsefromstr(Widget w, char *fromstr,
  Pixel *fg, Pixel *bg, char **fn) {
@@ -71,7 +71,8 @@ static Boolean cvtStringToPixmap(Display *disp, XrmValue *args, Cardinal *nargs,
   XrmValue *fromVal, XrmValue *toVal, XtPointer *converter_data) {
   char *path, *prefix;
   int res;
-  int w, h, xh, yh;
+  unsigned int w, h;
+  int xh, yh;
   Pixel fg, bg;
   Pixmap root, bitmap, pixmap;
   GC gc;

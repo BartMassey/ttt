@@ -182,7 +182,7 @@ static void levelcallback(Widget w, XtPointer cld, XtPointer cad) {
 
 void displayinit(int *argcp, char **argv) {
   int i;
-  Widget shell, bmw, layout, board, buttonbox, quit, new, level;
+  Widget shell, layout, board, buttonbox, quit, new, level;
   static char wname[] = "cellx";
 
   shell = XtAppInitialize(&app, "TTT", options, XtNumber(options),
