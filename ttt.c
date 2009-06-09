@@ -35,48 +35,6 @@ enum win whotowin(enum who w) {
   /*NOTREACHED*/
 }
 
-enum win referee(struct board *b) {
-  int i, j, blanks;
-  enum who w;
-
-  w = b->movewho;
-  blanks = 0;
-  /* row */
-  i = b->movex;
-  for (j = 0; j < 3; j++)
-    if (b->cell[i][j] != w)
-      break;
-  if (j >= 3)
-    return whotowin(w);
-  /* col */
-  j = b->movey;
-  for (i = 0; i < 3; i++)
-    if (b->cell[i][j] != w)
-      break;
-  if (i >= 3)
-    return whotowin(w);
-  /* main diagonal */
-  if (b->movex == b->movey) {
-    for (i = 0; i < 3; i++)
-      if (b->cell[i][i] != w)
-      	break;
-    if (i >= 3)
-      return whotowin(w);
-  }
-  /* off diagonal */
-  if (b->movex == 2 - b->movey) {
-    for (i = 0; i < 3; i++)
-      if (b->cell[i][2 - i] != w)
-      	break;
-    if (i >= 3)
-      return whotowin(w);
-  }
-  /* cleanup */
-  if (b->count)
-    return WIN_NOTYET;
-  return WIN_DRAW;
-}
-
 static enum who whoother(enum who w) {
   switch (w) {
   case WHO_X:
@@ -88,6 +46,50 @@ static enum who whoother(enum who w) {
   }
   abort();
   /*NOTREACHED*/
+}
+
+enum win referee(struct board *b) {
+  int i, j, blanks;
+  enum who w;
+  enum win victor;
+
+  w = b->movewho;
+  victor = whotowin(whoother(w));
+  blanks = 0;
+  /* row */
+  i = b->movex;
+  for (j = 0; j < 3; j++)
+    if (b->cell[i][j] != w)
+      break;
+  if (j >= 3)
+    return victor;
+  /* col */
+  j = b->movey;
+  for (i = 0; i < 3; i++)
+    if (b->cell[i][j] != w)
+      break;
+  if (i >= 3)
+    return victor;
+  /* main diagonal */
+  if (b->movex == b->movey) {
+    for (i = 0; i < 3; i++)
+      if (b->cell[i][i] != w)
+      	break;
+    if (i >= 3)
+      return victor;
+  }
+  /* off diagonal */
+  if (b->movex == 2 - b->movey) {
+    for (i = 0; i < 3; i++)
+      if (b->cell[i][2 - i] != w)
+      	break;
+    if (i >= 3)
+      return victor;
+  }
+  /* cleanup */
+  if (b->count)
+    return WIN_NOTYET;
+  return WIN_DRAW;
 }
 
 static int minmax(struct board *b, enum who w, int lev) {
