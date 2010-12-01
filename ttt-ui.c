@@ -116,6 +116,14 @@ void resetboard(void) {
    NULL);
 }
 
+void onemove(void) {
+  if (!RANDOM(MAX(1, 15 * curlev - currentboard.count)))
+    randommove(&currentboard, computerside);
+  else
+    computermove(&currentboard, computerside, 2 * curlev, globalData.misere);
+  refreshboard(&currentboard);
+}
+
 /*ARGSUSED*/
 static void movecallback(Widget w, XtPointer clientData, XtPointer callData) {
   int i, x, y;
@@ -154,11 +162,7 @@ static void movecallback(Widget w, XtPointer clientData, XtPointer callData) {
     won = 1;
     return;
   }
-  if (!RANDOM(MAX(1, 15 * curlev - currentboard.count)))
-    randommove(&currentboard, computerside);
-  else
-    computermove(&currentboard, computerside, 2 * curlev, globalData.misere);
-  refreshboard(&currentboard);
+  onemove();
   switch (winner = referee(&currentboard, globalData.misere)) {
   case WIN_NOTYET:
     break;

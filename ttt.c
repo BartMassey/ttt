@@ -214,20 +214,10 @@ void initboard(void) {
   won = 0;
   currentboard = newboard;
   resetboard();
-  if (compfirst) {
-    humanside = WHO_O;
-    computerside = WHO_X;
-    move = RANDOM(9);
-    x = move % 3;
-    y = move / 3;
-    currentboard.movex = x;
-    currentboard.movey = y;
-    currentboard.movewho = WHO_X;
-    currentboard.cell[x][y] = WHO_X;
-    currentboard.count--;
-    refreshboard(&currentboard);
-  }
+  if (compfirst)
+    onemove();
 }
+
 
 int main(int argc, char **argv) {
   newboard.count = 9;

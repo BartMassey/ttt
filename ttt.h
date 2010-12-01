@@ -62,3 +62,4 @@ extern void refreshboard(struct board *b);
 extern void resetboard(void);
 extern void displayinit(int *argcp, char **argv);
 extern void go(void);
+extern void onemove(void);
