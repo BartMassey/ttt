@@ -1,11 +1,12 @@
 # TTT
 Copyright (c) 1987 Bart Massey
 
-TTT is an X11 graphical tic-tac-toe program I wrote in 1987
-in C.  It is every bit as beautiful today. I kind of think I
-must have originally used Xaw, but I clearly later replaced
-this with Motif widgets. The original development history is
-long-lost.
+TTT is an X11 tic-tac-toe program I wrote in 1987
+in C.  It is every bit as beautiful today.
+
+TTT was apparently originally textual; I clearly later added
+a GUI with Motif widgets. The early development history is
+long lost.
 
 Looking at the resource converter for text to pixmaps
 reminded me of how painful programming GUI apps in C with
