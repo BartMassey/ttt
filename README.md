@@ -43,6 +43,17 @@ the UI. You can
 
 or you can `make install` (with appropriate permissions).
 
+## "TODO"
+
+OK, neither of things will ever be done, but I was clearly
+thinking of them at one point.
+
+* Improve resource handling so that the program falls back
+  to text if the bitmap graphics are unavailable.
+
+* Embed fallback bitmap graphics in the program, or failing
+  that at least graphics resources.
+
 ## License
 
 This program is licensed under the "MIT License". Please see
