@@ -5,3 +5,5 @@
  * Please see the file COPYING in the source
  * distribution of this software for license terms.
  */
+
+extern void InstallXmCvtBitmapStringToPixmap(Widget w);

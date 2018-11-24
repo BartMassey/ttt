@@ -171,7 +171,7 @@ static void freePixmap(XtAppContext app, XrmValue *to,
 
 void InstallXmCvtBitmapStringToPixmap(Widget w) {
   static XtConvertArgRec cvtArg[2];
-  int depth;
+  size_t depth;
 
   XtVaGetValues(w, XmNdepth, &depth, NULL);
   cvtArg[0].address_mode = XtImmediate;
